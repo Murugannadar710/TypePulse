@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JavaScript Quiz App</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #b9b3a9;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .navbar {
+      background-color: #333;
+      width: 100%;
+      padding: 15px;
+      text-align: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      margin: 0 15px;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .navbar a:hover {
+      background-color: #555;
+    }
+
+    .container {
+      width: 450px;
+      padding: 20px;
+      margin-top: 120px; /* Adjusted for navbar spacing */
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    #questionNumber {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .question {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .options {
+      margin-bottom: 20px;
+    }
+
+    .option {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #428bca;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+      margin-right: 10px;
+    }
+
+    .button:hover {
+      background-color: #3071a9;
+    }
+
+    .result {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .hide {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <a href="index.html">Back to Home</a>
+    <a href="improve.html">typing game</a>
+  </div>
+
+ <!-- Quiz Form -->
+ <form id="quizForm" action="save_quiz.php" method="POST">
+    <div class="container">
+      <h1>Quiz App</h1>
+      <div id="questionNumber"></div>
+      <div id="quiz"></div>
+      <div id="result" class="result"></div>
+      <button id="submit" class="button" type="button">Submit</button>
+      <button id="retry" class="button hide" type="button">Retry</button>
+      <button id="showAnswer" class="button hide" type="button">Show Answer</button>
+      <button id="saveResult" class="button hide" type="button">Save Result</button>
+    </div>
+  </form>
+
+  <script>
+    const quizData = [
+      { question: 'What is the national animal of India?', options: ['Tiger', 'Elephant', 'Lion', 'Peacock'], answer: 'Tiger' },
+      { question: 'Which river is the longest in India?', options: ['Ganga', 'Brahmaputra', 'Yamuna', 'Godavari'], answer: 'Ganga' },
+      { question: 'Which is the largest desert in India?', options: ['Thar Desert', 'Rann of Kutch', 'Deccan Plateau', 'Ladakh'], answer: 'Thar Desert' },
+      { question: 'What is the national flower of India?', options: ['Rose', 'Lotus', 'Marigold', 'Jasmine'], answer: 'Lotus' },
+      { question: 'Which bird is known as the national bird of India?', options: ['Sparrow', 'Peacock', 'Parrot', 'Crow'], answer: 'Peacock' },
+      { question: 'Which is the largest mammal on Earth?', options: ['Elephant', 'Blue Whale', 'Hippopotamus', 'Giraffe'], answer: 'Blue Whale' },
+      { question: 'What type of forest is the Sundarbans known for?', options: ['Mangrove Forests', 'Rainforests', 'Deciduous Forests', 'Coniferous Forests'], answer: 'Mangrove Forests' },
+      { question: 'Which is the smallest state in India by area?', options: ['Goa', 'Sikkim', 'Tripura', 'Mizoram'], answer: 'Goa' },
+      { question: 'Which animal is known as the Ship of the Desert?', options: ['Camel', 'Horse', 'Elephant', 'Donkey'], answer: 'Camel' },
+      { question: 'Which energy source is considered renewable?', options: ['Coal', 'Natural Gas', 'Solar', 'Petroleum'], answer: 'Solar' }
+    ];
+
+    const quizContainer = document.getElementById('quiz');
+    const resultContainer = document.getElementById('result');
+    const questionNumberContainer = document.getElementById('questionNumber');
+    const submitButton = document.getElementById('submit');
+    const retryButton = document.getElementById('retry');
+    const showAnswerButton = document.getElementById('showAnswer');
+    const saveResultButton = document.getElementById('saveResult');
+
+    let currentQuestion = 0;
+    let score = 0;
+    let incorrectAnswers = [];
+
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function updateQuestionNumber() {
+      questionNumberContainer.innerHTML = `Question ${currentQuestion + 1} of ${quizData.length}`;
+    }
+
+    function displayQuestion() {
+      const questionData = quizData[currentQuestion];
+
+      const questionElement = document.createElement('div');
+      questionElement.className = 'question';
+      questionElement.innerHTML = questionData.question;
+
+      const optionsElement = document.createElement('div');
+      optionsElement.className = 'options';
+
+      const shuffledOptions = [...questionData.options];
+      shuffleArray(shuffledOptions);
+
+      for (let i = 0; i < shuffledOptions.length; i++) {
+        const option = document.createElement('label');
+        option.className = 'option';
+
+        const radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.name = 'quiz';
+        radio.value = shuffledOptions[i];
+
+        const optionText = document.createTextNode(shuffledOptions[i]);
+
+        option.appendChild(radio);
+        option.appendChild(optionText);
+        optionsElement.appendChild(option);
+      }
+
+      quizContainer.innerHTML = '';
+      quizContainer.appendChild(questionElement);
+      quizContainer.appendChild(optionsElement);
+
+      updateQuestionNumber();
+    }
+
+    function checkAnswer() {
+      const selectedOption = document.querySelector('input[name="quiz"]:checked');
+      if (selectedOption) {
+        const answer = selectedOption.value;
+        if (answer === quizData[currentQuestion].answer) {
+          score++;
+        } else {
+          incorrectAnswers.push({
+            question: quizData[currentQuestion].question,
+            incorrectAnswer: answer,
+            correctAnswer: quizData[currentQuestion].answer,
+          });
+        }
+        currentQuestion++;
+        selectedOption.checked = false;
+        if (currentQuestion < quizData.length) {
+          displayQuestion();
+        } else {
+          displayResult();
+        }
+      }
+    }
+
+    function displayResult() {
+      quizContainer.style.display = 'none';
+      submitButton.style.display = 'none';
+      retryButton.style.display = 'inline-block';
+      showAnswerButton.style.display = 'inline-block';
+      saveResultButton.style.display = 'inline-block';
+      resultContainer.innerHTML = `You scored ${score} out of ${quizData.length}!`;
+
+      // Send the score to the PHP script for storage
+      fetch('save_quiz_result.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `score=${score}&total_questions=${quizData.length}`
+      })
+      .then(response => response.text())
+      .then(data => {
+        console.log(data); // Check if data was saved successfully
+      })
+      .catch(error => console.error('Error:', error));
+    }
+
+    function retryQuiz() {
+      currentQuestion = 0;
+      score = 0;
+      incorrectAnswers = [];
+      quizContainer.style.display = 'block';
+      submitButton.style.display = 'inline-block';
+      retryButton.style.display = 'none';
+      showAnswerButton.style.display = 'none';
+      saveResultButton.style.display = 'none';
+      resultContainer.innerHTML = '';
+      displayQuestion();
+    }
+
+    function showAnswer() {
+      quizContainer.style.display = 'none';
+      submitButton.style.display = 'none';
+      retryButton.style.display = 'inline-block';
+      showAnswerButton.style.display = 'none';
+      saveResultButton.style.display = 'none';
+
+      let incorrectAnswersHtml = '';
+      for (let i = 0; i < incorrectAnswers.length; i++) {
+        incorrectAnswersHtml += `
+          <p>
+            <strong>Question:</strong> ${incorrectAnswers[i].question}<br>
+            <strong>Your Answer:</strong> ${incorrectAnswers[i].incorrectAnswer}<br>
+            <strong>Correct Answer:</strong> ${incorrectAnswers[i].correctAnswer}
+          </p>
+        `;
+      }
+
+      resultContainer.innerHTML = `
+        <p>You scored ${score} out of ${quizData.length}!</p>
+        <p>Incorrect Answers:</p>
+        ${incorrectAnswersHtml}
+      `;
+    }
+
+    saveResultButton.addEventListener('click', function () {
+      fetch('save_quiz_result.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `score=${score}&total_questions=${quizData.length}`
+      })
+      .then(response => response.text())
+      .then(data => {
+        alert('Your result has been saved successfully!');
+      })
+      .catch(error => console.error('Error:', error));
+    });
+
+    submitButton.addEventListener('click', checkAnswer);
+    retryButton.addEventListener('click', retryQuiz);
+    showAnswerButton.addEventListener('click', showAnswer);
+
+    displayQuestion();
+  </script>
+</body>
+</html>

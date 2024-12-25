@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Data Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<style>
+body {
+    background: url('img/bg2.jpg') no-repeat center center fixed;
+    background-size: cover; /* Ensures the image covers the entire page */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background: linear-gradient(135deg, #f9fdff, #d4dee1, #d5eef9);
+    padding: 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#download-btn {
+    background-color: #007BFF;
+}
+
+#download-btn:hover {
+    background-color: #0056b3;
+}
+</style>
+<body>
+    <div class="container">
+        <h1>Typing Data Analysis</h1>
+
+        <!-- Button to go back -->
+        <button id="back-btn">Back to Home</button>
+
+        <!-- Download Button -->
+        <button id="download-btn">Download Data and Chart</button>
+
+        <!-- Display the table of results -->
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <th>Date & Time</th>
+                    <th>WPM</th>
+                    <th>CPM</th>
+                    <th>Mistakes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data rows will be populated by JavaScript -->
+            </tbody>
+        </table>
+
+        <!-- Chart container -->
+        <div>
+            <canvas id="typingGraph"></canvas>
+        </div>
+
+        <script src="analyze.js"></script>
+        <script>
+            // Function to download data as CSV
+            document.getElementById('download-btn').addEventListener('click', function () {
+                // Download the table data as CSV
+                const table = document.getElementById('data-table');
+                let csvData = [];
+                let rows = table.querySelectorAll('tr');
+
+                rows.forEach((row, index) => {
+                    let rowData = [];
+                    let cols = row.querySelectorAll('th, td');
+                    cols.forEach(col => rowData.push(col.innerText));
+                    if (rowData.length > 0) csvData.push(rowData.join(','));
+                });
+
+                const csvString = csvData.join('\n');
+                const blob = new Blob([csvString], { type: 'text/csv' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'typing_data.csv';
+                link.click();
+
+                // Download the chart as an image (PNG)
+                const chart = document.getElementById('typingGraph');
+                const chartInstance = Chart.getChart(chart);
+                const imageURL = chartInstance.toBase64Image();
+
+                const imageLink = document.createElement('a');
+                imageLink.href = imageURL;
+                imageLink.download = 'typing_chart.png';
+                imageLink.click();
+            });
+        </script>
+    </div>
+</body>
+</html>

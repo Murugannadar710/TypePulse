@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>About Us - TypePulse</title>
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: linear-gradient(135deg, #f5a623, #fdbb2d);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        h1:hover {
+            transform: scale(1.1);
+        }
+
+        /* Container */
+        .container {
+            width: 80%;
+            max-width: 800px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            margin: 20px;
+        }
+
+        .about-description {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .about-description p {
+            transition: color 0.3s ease;
+        }
+
+        .about-description p:hover {
+            color: #f5a623;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-evenly;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .feature-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 200px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-box i {
+            font-size: 2.5em;
+            color: #f5a623;
+            margin-bottom: 20px;
+        }
+
+        /* Back Button */
+        .back-button {
+            font-size: 1.2em;
+            color: #fff;
+            background: #f5a623;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #fdbb2d;
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .container {
+                width: 90%;
+                margin: 20px;
+            }
+
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .feature-box {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>About TypePulse</h1>
+
+    <div class="container">
+        <!-- About Description -->
+        <div class="about-description">
+            <p>TypePulse is your go-to platform for discovering the latest trends, tools, and resources in the tech world. We focus on delivering high-quality content, updates, and guides to help you stay ahead of the curve. Whether you're a beginner or a seasoned expert, TypePulse is designed to fuel your passion for technology.</p>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features">
+            <div class="feature-box">
+                <i class="fas fa-laptop-code"></i>
+                <h3>Latest Tech Updates</h3>
+                <p>Stay updated with the latest advancements in technology, programming, and development.</p>
+            </div>
+
+            <div class="feature-box">
+                <i class="fas fa-tools"></i>
+                <h3>Tools & Resources</h3>
+                <p>Explore a wide range of tools and resources to help you work smarter and more efficiently.</p>
+            </div>
+
+            <div class="feature-box">
+                <i class="fas fa-comments"></i>
+                <h3>Community Driven</h3>
+                <p>Join a community of like-minded tech enthusiasts and share your knowledge and experiences.</p>
+            </div>
+        </div>
+
+        <!-- Back Button -->
+        <a href="index.html" class="back-button">Back to Home</a>
+    </div>
+
+</body>
+</html>

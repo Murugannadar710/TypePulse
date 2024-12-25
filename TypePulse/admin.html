@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypePulse Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        /* Header Styles */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #2C3E50;
+        padding: 20px;
+        color: #ECF0F1;
+    }
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .logout button {
+        background-color: #E74C3C;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    .logout button:hover {
+        background-color: #C0392B;
+    }
+
+    /* Popup Styles */
+    #logout-popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+    }
+    .popup-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    .popup-content button {
+        padding: 10px 20px;
+        background-color: #E74C3C;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        margin: 10px;
+        cursor: pointer;
+    }
+    .popup-content button:hover {
+        background-color: #C0392B;
+    }
+
+        .sidebar {
+            width: 200px;
+            background-color: #333;
+            padding-top: 20px;
+            color: white;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .sidebar ul li button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .sidebar ul li button:hover {
+            background-color: #575757;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #333;
+            color: white;
+        }
+
+     
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">TypePulse Admin</div>
+        <div class="logout">
+            <button onclick="showLogoutPopup()">Logout</button>
+        </div>
+    </header>
+    
+    <!-- Logout Confirmation Popup -->
+    <div id="logout-popup">
+        <div class="popup-content">
+            <p>Do you really want to logout?</p>
+            <button onclick="logout()">Yes</button>
+            <button onclick="closePopup()">No</button>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <nav>
+            <ul>
+                <li><button onclick="window.location.href='add.php'">Add User</button></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <section id="users">
+            <h2>User Management</h2>
+            <table id="usersTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Created At</th>
+                        <th>Password</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    
+
+        <section id="contact-form">
+            <h2>Contact Form Submissions</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                        <th>Submitted At</th>
+                    </tr>
+                </thead>
+                <tbody id="contact-form-table-body">
+                    <!-- Contact form rows will be populated here -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="quiz-results">
+            <h2>Quiz Results</h2>
+            <table id="quizResultsTable">
+                <thead>
+                    <tr>
+                        <th>Score</th>
+                        <th>Total Questions</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+        <section id="scores">
+            <h2>Scores</h2>
+            <table id="scoresTable">
+                <thead>
+                    <tr>
+                        <th>Score</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+        <section id="typing-results">
+            <h2>Typing Test Results</h2>
+            <table id="typingResultsTable">
+                <thead>
+                    <tr>
+                        <th>WPM</th>
+                        <th>CPM</th>
+                        <th>Mistakes</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </div>
+
+    <script>
+
+         // Show the logout confirmation popup
+    function showLogoutPopup() {
+        document.getElementById('logout-popup').style.display = 'flex';
+    }
+
+    // Close the logout confirmation popup
+    function closePopup() {
+        document.getElementById('logout-popup').style.display = 'none';
+    }
+
+    // Redirect to logout.php (log out the user and redirect to index.html)
+    function logout() {
+        window.location.href = 'logout.php';
+    }
+
+
+        // Fetch and populate data
+        fetch('admin.php')
+            .then(response => response.json())
+            .then(data => {
+                const usersTable = document.getElementById('usersTable').getElementsByTagName('tbody')[0];
+                data.users.forEach(user => {
+                    const row = usersTable.insertRow();
+                    row.innerHTML = `
+                        <td>${user.id}</td>
+                        <td>${user.username}</td>
+                        <td>${user.email}</td>
+                        <td>${user.created_at}</td>
+                        <td>${user.password}</td>
+                    `;
+                });
+
+                  // Handle the quiz results table
+        const quizResultsTable = document.getElementById('quizResultsTable').getElementsByTagName('tbody')[0];
+        data.quizResults.forEach(result => {
+            const row = quizResultsTable.insertRow();
+            row.innerHTML = `
+                <td>${result.score}</td>
+                <td>${result.total_questions}</td>
+                <td>${result.timestamp}</td>
+            `;
+        });
+
+        // Handle the typing results table
+        const typingResultsTable = document.getElementById('typingResultsTable').getElementsByTagName('tbody')[0];
+        data.typingResults.forEach(result => {
+            const row = typingResultsTable.insertRow();
+            row.innerHTML = `
+                <td>${result.wpm}</td>
+                <td>${result.cpm}</td>
+                <td>${result.mistakes}</td>
+                <td>${result.timestamp}</td>
+            `;
+        });
+
+        // Handle the scores table
+        const scoresTable = document.getElementById('scoresTable').getElementsByTagName('tbody')[0];
+        data.scores.forEach(score => {
+            const row = scoresTable.insertRow();
+            row.innerHTML = `
+                <td>${score.score}</td>
+                <td>${score.timestamp}</td>
+            `;
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+
+    </script>
+</body>
+</html>

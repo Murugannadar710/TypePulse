@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Typing Tutorials</title>
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Back Button */
+        .back-button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #ff6a00, #ff8c00);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(45deg, #ff8c00, #ff6a00);
+        }
+
+        /* Tutorial Section Styling */
+        .tutorial-container {
+            width: 90%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2x2 grid layout */
+            gap: 40px;
+            margin-top: 20px;
+            box-sizing: border-box;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .video-card video {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Social and Navigation Section */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            font-size: 2.5em;
+            color: white;
+            transition: color 0.3s ease;
+            margin: 0 10px;
+        }
+
+        .social-links a:hover {
+            color: #feb47b;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media screen and (max-width: 1440px) {
+            .tutorial-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 900px) {
+            .tutorial-container {
+                grid-template-columns: 1fr; /* 1-column layout on smaller screens */
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Typing Tutorials</h1>
+
+    <div class="tutorial-container">
+        <!-- Video Card 1 -->
+        <div class="video-card">
+            <h3>Typing Speed Boost</h3>
+            <video controls>
+                <source src="https://www.example.com/video1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Video Card 2 -->
+        <div class="video-card">
+            <h3>Perfect Your Typing Technique</h3>
+            <video controls>
+                <source src="https://www.example.com/video2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Video Card 3 -->
+        <div class="video-card">
+            <h3>Advanced Typing Tips</h3>
+            <video controls>
+                <source src="https://www.example.com/video3.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Video Card 4 -->
+        <div class="video-card">
+            <h3>Typing for Beginners</h3>
+            <video controls>
+                <source src="https://www.example.com/video4.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <!-- Social Links Section -->
+    <div class="social-links">
+        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </div>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-button">Back to Home</a>
+
+</body>
+</html>

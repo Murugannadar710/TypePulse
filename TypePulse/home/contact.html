@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Contact Us</title>
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+    
+        /* Back Button */
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #ff6a00, #ff8c00);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    
+        .back-button:hover {
+            background: linear-gradient(45deg, #ff8c00, #ff6a00);
+        }
+    
+        /* Container Styling */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+    
+        .form-container, .contact-info {
+            flex: 1;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+    
+        .form-container h2, .contact-info h2 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+    
+        input[type="text"], input[type="email"], textarea {
+            width: 80%; /* Decreased width of input fields */
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            background-color: rgba(255, 255, 255, 0.7);
+            color: #333;
+        }
+    
+        textarea {
+            height: 150px;
+        }
+    
+        button {
+            padding-bottom: 10px;
+            background: linear-gradient(45deg, #ff6a00, #ff8c00);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+    
+        button:hover {
+            background: linear-gradient(45deg, #ff8c00, #ff6a00);
+        }
+    
+        .social-links {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+    
+        .social-links a {
+            font-size: 2.5em;
+            color: white;
+            transition: color 0.3s ease;
+        }
+    
+        .social-links a:hover {
+            color: #feb47b;
+        }
+    
+        /* Contact Info */
+        .contact-info img {
+            width: 50px;
+            margin: 10px;
+        }
+    
+        /* Media Queries for Responsiveness */
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+    
+            .form-container, .contact-info {
+                width: 80%;
+                margin: 10px 0;
+            }
+    
+            h1 {
+                font-size: 2.5em;
+            }
+        }
+    
+        @media screen and (max-width: 480px) {
+            .form-container, .contact-info {
+                width: 100%;
+            }
+    
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+
+    <h1>Contact Us</h1>
+
+    <div class="container">
+        <!-- Form Section -->
+        <div class="form-container">
+            <h2>Get in Touch</h2>
+            <form action="submit_contact.php" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+        <!-- Contact Info Section -->
+        <div class="contact-info">
+            <h2>Our Information</h2>
+            <div>
+                <h3><i class="fas fa-map-marker-alt"></i> Address</h3>
+                <p>123 Main Street, City, Country</p>
+            </div>
+            <div>
+                <h3><i class="fas fa-phone-alt"></i> Phone</h3>
+                <p>+123 456 7890</p>
+            </div>
+            <div>
+                <h3><i class="fas fa-envelope"></i> Email</h3>
+                <p>contact@company.com</p>
+            </div>
+            <div>
+                <h3><i class="fas fa-share-alt"></i> Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-button">Back to Home</a>
+
+</body>
+</html>

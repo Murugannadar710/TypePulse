@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypePulse - Boost Your Typing Skills</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #1f1f2e;
+            color: white;
+            scroll-behavior: smooth;
+        }
+    
+        a {
+            text-decoration: none;
+        }
+    
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    
+        header.hero {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            text-align: center;
+            padding: 100px 20px;
+            height: 900px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    
+        .navbar {
+            position: absolute;
+            top: 20px;
+            left: 55%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%;
+        }
+    
+        .navbar .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffe4f4;
+        }
+    
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+
+        }
+    
+        .navbar .nav-links li a {
+            color: #ffe4f4;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+    
+        .navbar .nav-links li a:hover {
+            color: #ff758c;
+        }
+    
+        /* Burger Menu Styling */
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+    
+        .burger-menu div {
+            width: 25px;
+            height: 3px;
+            background-color: #ffe4f4;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+    
+        .nav-links.active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background: #1f1f2e;
+            width: 100%;
+            padding: 10px 20px;
+            gap: 10px;
+        }
+    
+        .nav-links.active li a {
+            font-size: 1.2rem;
+        }
+    
+        /* Hero Content */
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.3;
+            color: #ffe4f4;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        }
+    
+        .hero-content span {
+            color: #ff758c;
+        }
+    
+        .btn-primary {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 30px;
+            background: #ff758c;
+            color: white;
+            font-weight: 700;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+    
+        .btn-primary:hover {
+            background: #e0576f;
+        }
+    
+        /* Section Styles */
+        section {
+            padding: 80px 20px;
+            text-align: center;
+            color: #ffe4f4;
+        }
+    
+        /* About Section Styles */
+      /* About Section Styles */
+#about {
+    background: #1f1f2e;
+    padding: 80px 20px;
+    border-radius: 8px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-title {
+    font-size: 2.8rem;
+    color: #ffe4f4;
+    margin-bottom: 20px;
+    position: relative;
+    animation: fadeInUp 1s ease-out;
+}
+
+.about-description {
+    font-size: 1.2rem;
+    color: #ddd;
+    margin-bottom: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.6;
+    animation: fadeInUp 1.2s ease-out;
+}
+
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    animation: fadeInUp 1.4s ease-out;
+}
+
+.about-feature {
+    background: rgba(0, 0, 0, 0.5); /* Can be removed or changed if desired */
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.about-feature:hover {
+    transform: translateY(-10px);
+    background-color: #333;
+}
+
+.about-feature i {
+    font-size: 3rem;
+    color: #ff758c;
+    margin-bottom: 20px;
+}
+
+.about-feature h3 {
+    font-size: 1.8rem;
+    color: #ffe4f4;
+    margin-bottom: 10px;
+}
+
+.about-call-to-action {
+    margin-top: 50px;
+    font-size: 1.2rem;
+    color: #ddd;
+}
+
+.about-call-to-action p {
+    margin-bottom: 30px;
+}
+
+.about-call-to-action .btn-primary {
+    display: inline-block;
+    padding: 15px 30px;
+    background: #ff758c;
+    color: white;
+    font-weight: 700;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.about-call-to-action .btn-primary:hover {
+    background: #e0576f;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    
+        #features {
+            background: #3b3f51;
+            padding: 60px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+    
+        #features h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ffe4f4;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+        }
+    
+        #features .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+    
+        .feature {
+            background: #29293d;
+            padding: 30px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+    
+        .feature i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ff758c;
+        }
+    
+        #test {
+            background: #1f2029;
+            padding: 60px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+    
+        #test h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ffe4f4;
+        }
+    
+        #test p {
+            font-size: 1.2rem;
+            color: #888;
+            margin-bottom: 30px;
+        }
+    
+        .btn-secondary {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #ff758c;
+            color: white;
+            font-weight: 700;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+    
+        .btn-secondary:hover {
+            background: #e0576f;
+        }
+    
+    
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                display: none;
+            }
+    
+            .navbar .burger-menu {
+                display: flex;
+            }
+    
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+    
+            .btn-primary {
+                padding: 10px 20px;
+            }
+    
+            .btn-secondary {
+                padding: 10px 20px;
+            }
+    
+            section {
+                padding: 40px 15px;
+            }
+    
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <header class="hero">
+        <nav class="navbar">
+            <div class="logo">TypePulse</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#test">Take the Test</a></li>
+                <a href="admin-login.html" class="btn-primary">admin</a>
+
+            </ul>
+            <!-- Burger Menu -->
+            <div class="burger-menu" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+        <div class="hero-content">
+            <h1>Master Your Typing Skills with <span>TypePulse</span></h1>
+            <p>Test your speed, improve your accuracy, and track your progress!</p>
+            <a href="login.html" class="btn-primary">Start Typing Test</a>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="about-container">
+            <h2 class="about-title">About TypePulse</h2>
+            <p class="about-description">
+                TypePulse is more than just a typing test platform — it's your personal typing coach, designed to help you improve your typing speed, accuracy, and overall productivity. Whether you're aiming to become a typing pro, enhance your productivity at work, or just have fun while learning, TypePulse provides a wide range of challenges, tips, and real-time analytics to help you meet your goals.
+            </p>
+            <div class="about-features">
+                <div class="about-feature">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>Targeted Training</h3>
+                    <p>
+                        With personalized challenges and difficulty levels, TypePulse tailors the experience to meet your needs, helping you improve at your own pace.
+                    </p>
+                </div>
+                <div class="about-feature">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Advanced Analytics</h3>
+                    <p>
+                        Track your progress with real-time stats, charts, and insights into your typing speed, accuracy, and areas for improvement.
+                    </p>
+                </div>
+                <div class="about-feature">
+                    <i class="fas fa-users"></i>
+                    <h3>Global Community</h3>
+                    <p>
+                        Join a global network of typing enthusiasts, compete in challenges, and share tips with others to help each other grow.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section id="features">
+        <h2>Key Features</h2>
+        <div class="features-grid">
+            <div class="feature">
+                <i class="fas fa-chart-line"></i>
+                <h3>Real-Time Analytics</h3>
+                <p>Track your typing speed and accuracy as you type in real-time, so you can see your progress and areas for improvement.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-trophy"></i>
+                <h3>Leaderboards</h3>
+                <p>Compete with others in typing challenges and climb the ranks as you improve your typing speed and precision.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-gamepad"></i>
+                <h3>Custom Challenges</h3>
+                <p>Choose difficulty levels and test your limits with custom challenges designed to push your typing skills to the next level.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="test">
+        <h2>Ready to Challenge Yourself?</h2>
+        <p>Take the typing test and see where you stand! Push yourself to beat your own record and become a typing master.</p>
+        <a href="login.html" class="btn-secondary">Start Now</a>
+    </section>
+
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
